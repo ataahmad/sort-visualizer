@@ -1,0 +1,22 @@
+.barFrame {
+    background-color: white;
+    margin: 10vw;
+    min-height: 80vh;
+    display: flex;
+    justify-content: center;
+    margin-bottom: 0;
+}
+
+.bar {
+    width: 20px;
+    background-color: black;
+    margin: 3px;
+}
+
+.selected.bar {
+    width: 20px;
+    background-color: red;
+    margin: 3px;
+}
+
+
