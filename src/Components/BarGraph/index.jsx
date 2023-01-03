@@ -1,26 +1,29 @@
 import React from "react";
 import './BarGraph.css'
 
-const generateNewArray = () => { return Array.from({ length: 20 }, () => Math.floor(Math.random() * 100)) };
-const TIMEOUT_INT = 500;
+const ARRAY_LENGTH = 20;
+const TIMEOUT_INT = 200;
+const generateNewArray = () => { return Array.from({ length: ARRAY_LENGTH }, () => Math.floor(Math.random() * 100)) };
 
 class Bar extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            data: this.props.data
+            data: this.props.data,
+            selected: this.props.selected
         };
     }
 
     componentWillReceiveProps(nextProps) {
         this.setState({
-            data: nextProps.data
+            data: nextProps.data,
+            selected: nextProps.selected
         });
     }
 
     render() {
         return (<div
-            className="bar"
+            className={"bar" + (this.state.selected ? " selected" : "")}
             value={String(this.state.data)}
             style={{ height: String(this.state.data * 5) + 'px' }}
         >
@@ -32,7 +35,8 @@ class BarGraph extends React.Component {
     constructor(props) {
         super(props)
         this.state = {
-            arr: []
+            arr: [],
+            selected: [],
         }
     }
 
@@ -43,7 +47,8 @@ class BarGraph extends React.Component {
 
     refreshArray = () => {
         const newData = generateNewArray();
-        this.setState({ arr: newData });
+        const newSelected = new Array(ARRAY_LENGTH).fill(0);
+        this.setState({ arr: newData, selected: newSelected });
     }
 
     sort = () => {
@@ -51,30 +56,31 @@ class BarGraph extends React.Component {
         let n = arr.length;
         let i = 1;
         let key, j;
-    
+
         const sortStep = () => {
-          if (i < n) {
-            key = arr[i];
-            j = i - 1;
-    
-            /* Move elements of arr[0..i-1], that are 
-            greater than key, to one position ahead 
-            of their current position */
-            while (j >= 0 && arr[j] > key) {
-              arr[j + 1] = arr[j];
-              j = j - 1;
+            if (i < n) {
+                key = arr[i];
+                j = i - 1;
+
+                /* Move elements of arr[0..i-1], that are 
+                greater than key, to one position ahead 
+                of their current position */
+                while (j >= 0 && arr[j] > key) {
+                    arr[j + 1] = arr[j];
+                    j = j - 1;
+                }
+                arr[j + 1] = key;
+                i++;
+
+                // Update the state and schedule the next step
+                let newSel = new Array(i).fill(1).concat(new Array(n - i).fill(0));
+                this.setState({ arr: [...arr], selected: newSel }, () => setTimeout(sortStep, TIMEOUT_INT));
             }
-            arr[j + 1] = key;
-            i++;
-    
-            // Update the state and schedule the next step
-            this.setState({ arr: [...arr] }, () => setTimeout(sortStep, TIMEOUT_INT));
-          }
         };
-    
+
         // Schedule the first step
         setTimeout(sortStep, TIMEOUT_INT);
-      };
+    };
 
     render() {
         return (
@@ -85,8 +91,8 @@ class BarGraph extends React.Component {
                 </button>
                 <div className="barFrame">
                     {
-                        this.state.arr.map(item => {
-                            return <Bar data={item} />
+                        this.state.arr.map((item, index) => {
+                            return <Bar selected={this.state.selected[index]} data={item} />
                         })
                     }
                 </div>
