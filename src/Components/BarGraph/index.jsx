@@ -1,8 +1,8 @@
 import React from "react";
 import './BarGraph.css'
 
-const ARRAY_LENGTH = 20;
-const TIMEOUT_INT = 200;
+const ARRAY_LENGTH = 100;
+const TIMEOUT_INT = 100;
 const generateNewArray = () => { return Array.from({ length: ARRAY_LENGTH }, () => Math.floor(Math.random() * 100)) };
 
 class Bar extends React.Component {
@@ -51,7 +51,7 @@ class BarGraph extends React.Component {
         this.setState({ arr: newData, selected: newSelected });
     }
 
-    sort = () => {
+    insertionSort = () => {
         let arr = [...this.state.arr];
         let n = arr.length;
         let i = 1;
@@ -82,13 +82,14 @@ class BarGraph extends React.Component {
         setTimeout(sortStep, TIMEOUT_INT);
     };
 
+
+
     render() {
         return (
             <div>
                 <button onClick={this.refreshArray}> Refresh </button>
-                <button onClick={this.sort}>
-                    Insertion Sort
-                </button>
+                <button onClick={this.insertionSort}> Insertion Sort </button>
+
                 <div className="barFrame">
                     {
                         this.state.arr.map((item, index) => {
