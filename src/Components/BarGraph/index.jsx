@@ -1,8 +1,8 @@
 import React from "react";
 import './BarGraph.css'
 
-const ARRAY_LENGTH = 20;
-const TIMEOUT_INT = 200;
+const ARRAY_LENGTH = 100;
+const TIMEOUT_INT = 100;
 const generateNewArray = () => { return Array.from({ length: ARRAY_LENGTH }, () => Math.floor(Math.random() * 100)) };
 
 class Bar extends React.Component {
@@ -14,11 +14,12 @@ class Bar extends React.Component {
         };
     }
 
-    componentWillReceiveProps(nextProps) {
-        this.setState({
-            data: nextProps.data,
-            selected: nextProps.selected
-        });
+    static getDerivedStateFromProps(nextProps, prevProps) {
+        const newState = {};
+        if (nextProps.data !== prevProps.data) newState.data = nextProps.data;
+        if (nextProps.selected !== prevProps.selected) newState.selected = nextProps.selected;
+        if (!newState.length) return newState;
+        return null;
     }
 
     render() {
@@ -51,7 +52,7 @@ class BarGraph extends React.Component {
         this.setState({ arr: newData, selected: newSelected });
     }
 
-    sort = () => {
+    insertionSort = () => {
         let arr = [...this.state.arr];
         let n = arr.length;
         let i = 1;
@@ -82,13 +83,14 @@ class BarGraph extends React.Component {
         setTimeout(sortStep, TIMEOUT_INT);
     };
 
+
+
     render() {
         return (
             <div>
                 <button onClick={this.refreshArray}> Refresh </button>
-                <button onClick={this.sort}>
-                    Insertion Sort
-                </button>
+                <button onClick={this.insertionSort}> Insertion Sort </button>
+
                 <div className="barFrame">
                     {
                         this.state.arr.map((item, index) => {
