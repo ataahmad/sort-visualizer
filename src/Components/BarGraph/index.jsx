@@ -14,11 +14,12 @@ class Bar extends React.Component {
         };
     }
 
-    componentWillReceiveProps(nextProps) {
-        this.setState({
-            data: nextProps.data,
-            selected: nextProps.selected
-        });
+    static getDerivedStateFromProps(nextProps, prevProps) {
+        const newState = {};
+        if (nextProps.data !== prevProps.data) newState.data = nextProps.data;
+        if (nextProps.selected !== prevProps.selected) newState.selected = nextProps.selected;
+        if (!newState.length) return newState;
+        return null;
     }
 
     render() {
