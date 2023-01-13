@@ -1,16 +1,21 @@
 import React from "react";
 import './BarGraph.css'
 
-const ARRAY_LENGTH = 100;
+const ARRAY_LENGTH = 15;
 const TIMEOUT_INT = 100;
 const generateNewArray = () => { return Array.from({ length: ARRAY_LENGTH }, () => Math.floor(Math.random() * 100)) };
+const PRIMARY_COLOR = 'black';
+const SORTED_COLOR = 'red';
+const HIGHLIGHT_COLOR = 'blue';
+
 
 class Bar extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
             data: this.props.data,
-            selected: this.props.selected
+            selected: this.props.selected,
+            highlighted: this.props.highlighted
         };
     }
 
@@ -24,9 +29,15 @@ class Bar extends React.Component {
 
     render() {
         return (<div
-            className={"bar" + (this.state.selected ? " selected" : "")}
+            // className={"bar" + (this.state.selected ? " selected" : "")}
+            className="bar"
             value={String(this.state.data)}
-            style={{ height: String(this.state.data * 5) + 'px' }}
+            style={{
+                height: String(this.state.data * 5) + 'px',
+                backgroundColor: (this.state.highlighted && HIGHLIGHT_COLOR ||
+                    this.state.selected && SORTED_COLOR ||
+                    PRIMARY_COLOR)
+            }}
         >
         </div>)
     }
