@@ -23,6 +23,7 @@ class Bar extends React.Component {
         const newState = {};
         if (nextProps.data !== prevProps.data) newState.data = nextProps.data;
         if (nextProps.selected !== prevProps.selected) newState.selected = nextProps.selected;
+        if (nextProps.highlighted !== prevProps.highlighted) newState.highlighted = nextProps.highlighted;
         if (!newState.length) return newState;
         return null;
     }
@@ -123,7 +124,7 @@ class BarGraph extends React.Component {
                     arr[j + 1] = key;
                     i++;
                     incrementing = false;
-                    
+
                     // Update the state and schedule the next step
                     let newSel = new Array(i).fill(1).concat(new Array(n - i).fill(0));
                     let newHigh = new Array(n).fill(0);
