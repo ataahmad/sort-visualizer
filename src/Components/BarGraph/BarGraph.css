@@ -9,13 +9,13 @@
 
 .bar {
     width: 20px;
-    background-color: black;
+    /* background-color: black; */
     margin: 3px;
 }
 
 .selected.bar {
     width: 20px;
-    background-color: red;
+    /* background-color: red; */
     margin: 3px;
 }
 
