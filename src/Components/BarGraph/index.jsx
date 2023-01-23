@@ -61,7 +61,8 @@ class BarGraph extends React.Component {
     refreshArray = () => {
         const newData = generateNewArray();
         const newSelected = new Array(ARRAY_LENGTH).fill(0);
-        this.setState({ arr: newData, selected: newSelected });
+        const newHigh = new Array(ARRAY_LENGTH).fill(0);
+        this.setState({ arr: newData, selected: newSelected, highlighted: newHigh });
     }
 
     insertionSort = () => {
