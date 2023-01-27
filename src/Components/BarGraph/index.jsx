@@ -1,8 +1,8 @@
 import React from "react";
 import './BarGraph.css'
 
-const ARRAY_LENGTH = 10;
-const TIMEOUT_INT = 300;
+const ARRAY_LENGTH = 100;
+const TIMEOUT_INT = 1;
 const generateNewArray = () => { return Array.from({ length: ARRAY_LENGTH }, () => Math.floor(Math.random() * 100)) };
 const PRIMARY_COLOR = 'black';
 const SORTED_COLOR = 'red';
@@ -110,9 +110,14 @@ class BarGraph extends React.Component {
     render() {
         return (
             <div>
-                <button onClick={this.refreshArray}> Refresh </button>
-                <button onClick={this.insertionSort}> Insertion Sort </button>
-
+                <div className="buttonBar">
+                    <div className="configButtons">
+                        <button onClick={this.refreshArray}> Refresh </button>
+                    </div>
+                    <div className="algoButtons">
+                        <button onClick={this.insertionSort}> Insertion Sort </button>
+                    </div>
+                </div>
                 <div className="barFrame">
                     {
                         this.state.arr.map((item, index) => {
