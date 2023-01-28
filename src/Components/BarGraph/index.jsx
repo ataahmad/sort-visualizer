@@ -1,8 +1,8 @@
 import React from "react";
 import './BarGraph.css'
 
-const ARRAY_LENGTH = 15;
-const TIMEOUT_INT = 100;
+const ARRAY_LENGTH = 50;
+const TIMEOUT_INT = 5;
 const generateNewArray = () => { return Array.from({ length: ARRAY_LENGTH }, () => Math.floor(Math.random() * 100)) };
 const PRIMARY_COLOR = 'black';
 const SORTED_COLOR = 'red';
@@ -30,7 +30,6 @@ class Bar extends React.Component {
 
     render() {
         return (<div
-            // className={"bar" + (this.state.selected ? " selected" : "")}
             className="bar"
             value={String(this.state.data)}
             style={{
@@ -62,39 +61,9 @@ class BarGraph extends React.Component {
     refreshArray = () => {
         const newData = generateNewArray();
         const newSelected = new Array(ARRAY_LENGTH).fill(0);
-        this.setState({ arr: newData, selected: newSelected });
+        const newHigh = new Array(ARRAY_LENGTH).fill(0);
+        this.setState({ arr: newData, selected: newSelected, highlighted: newHigh });
     }
-
-    // insertionSort = () => {
-    //     let arr = [...this.state.arr];
-    //     let n = arr.length;
-    //     let i = 1;
-    //     let key, j;
-
-    //     const sortStep = () => {
-    //         if (i < n) {
-    //             key = arr[i];
-    //             j = i - 1;
-
-    //             /* Move elements of arr[0..i-1], that are 
-    //             greater than key, to one position ahead 
-    //             of their current position */
-    //             while (j >= 0 && arr[j] > key) {
-    //                 arr[j + 1] = arr[j];
-    //                 j = j - 1;
-    //             }
-    //             arr[j + 1] = key;
-    //             i++;
-
-    //             // Update the state and schedule the next step
-    //             let newSel = new Array(i).fill(1).concat(new Array(n - i).fill(0));
-    //             this.setState({ arr: [...arr], selected: newSel }, () => setTimeout(sortStep, TIMEOUT_INT));
-    //         }
-    //     };
-
-    //     // Schedule the first step
-    //     setTimeout(sortStep, TIMEOUT_INT);
-    // };
 
     insertionSort = () => {
         let arr = [...this.state.arr];
@@ -116,7 +85,7 @@ class BarGraph extends React.Component {
                     incrementing = true;
 
                     // Update the state and schedule the next step
-                    let newSel = new Array(i).fill(1).concat(new Array(n - i).fill(0));
+                    let newSel = new Array(i).fill(1).concat(new Array(n - i - 1).fill(0));
                     let newHigh = new Array(n).fill(0);
                     newHigh[i] = newHigh[j] = 1;
                     this.setState({ arr: [...arr], selected: newSel, highlighted: newHigh }, () => setTimeout(incrementStep, TIMEOUT_INT));
@@ -126,7 +95,7 @@ class BarGraph extends React.Component {
                     incrementing = false;
 
                     // Update the state and schedule the next step
-                    let newSel = new Array(i).fill(1).concat(new Array(n - i).fill(0));
+                    let newSel = new Array(i).fill(1).concat(new Array(n - i - 1).fill(0));
                     let newHigh = new Array(n).fill(0);
                     newHigh[i] = newHigh[j] = 1;
                     this.setState({ arr: [...arr], selected: newSel, highlighted: newHigh }, () => setTimeout(incrementStep, TIMEOUT_INT));
@@ -138,14 +107,17 @@ class BarGraph extends React.Component {
         setTimeout(incrementStep, TIMEOUT_INT);
     };
 
-
-
     render() {
         return (
             <div>
-                <button onClick={this.refreshArray}> Refresh </button>
-                <button onClick={this.insertionSort}> Insertion Sort </button>
-
+                <div className="buttonBar">
+                    <div className="configButtons">
+                        <button onClick={this.refreshArray}> Refresh </button>
+                    </div>
+                    <div className="algoButtons">
+                        <button onClick={this.insertionSort}> Insertion Sort </button>
+                    </div>
+                </div>
                 <div className="barFrame">
                     {
                         this.state.arr.map((item, index) => {

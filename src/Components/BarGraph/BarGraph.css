@@ -9,14 +9,25 @@
 
 .bar {
     width: 20px;
-    /* background-color: black; */
-    margin: 3px;
-}
-
-.selected.bar {
-    width: 20px;
-    /* background-color: red; */
     margin: 3px;
 }
 
 
+.buttonBar {
+    display: flex;
+    justify-content: space-between;
+}
+
+.configButtons {
+    display: flex;
+    align-items: left;
+    justify-content: left;
+    margin-left: 10%;
+}
+
+.algoButtons {
+    display: flex;
+    align-items: right;
+    justify-content: right;
+    margin-right: 10%;
+}
