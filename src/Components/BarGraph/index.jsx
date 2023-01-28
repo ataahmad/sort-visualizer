@@ -1,8 +1,8 @@
 import React from "react";
 import './BarGraph.css'
 
-const ARRAY_LENGTH = 100;
-const TIMEOUT_INT = 1;
+const ARRAY_LENGTH = 50;
+const TIMEOUT_INT = 5;
 const generateNewArray = () => { return Array.from({ length: ARRAY_LENGTH }, () => Math.floor(Math.random() * 100)) };
 const PRIMARY_COLOR = 'black';
 const SORTED_COLOR = 'red';
