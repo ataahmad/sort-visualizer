@@ -1,6 +1,6 @@
 .barFrame {
     background-color: white;
-    margin: 1vh;
+    margin-top: 1vh;
     min-height: 80vh;
     display: flex;
     justify-content: center;
@@ -16,6 +16,7 @@
 .buttonBar {
     display: flex;
     justify-content: space-between;
+    margin-top: 1vh;
 }
 
 .configButtons {
