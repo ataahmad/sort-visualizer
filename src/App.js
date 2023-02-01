@@ -7,7 +7,7 @@ function App() {
   return (
     <div className="App">
       <header className="App-header">
-        Sorting Visualizer v{pjson.version}
+        Sorting Visualizer <small>v{pjson.version}</small>
       </header>
       <BarGraph/>
     </div>
