@@ -1,47 +1,10 @@
 import React from "react";
-import './BarGraph.css'
+import '../Components.css';
+import Bar from "../Bar";
 
 const ARRAY_LENGTH = 50;
-const TIMEOUT_INT = 5;
+const TIMEOUT_INT = 100;
 const generateNewArray = () => { return Array.from({ length: ARRAY_LENGTH }, () => Math.floor(Math.random() * 100)) };
-const PRIMARY_COLOR = 'black';
-const SORTED_COLOR = 'red';
-const HIGHLIGHT_COLOR = 'blue';
-
-
-class Bar extends React.Component {
-    constructor(props) {
-        super(props);
-        this.state = {
-            data: this.props.data,
-            selected: this.props.selected,
-            highlighted: this.props.highlighted
-        };
-    }
-
-    static getDerivedStateFromProps(nextProps, prevProps) {
-        const newState = {};
-        if (nextProps.data !== prevProps.data) newState.data = nextProps.data;
-        if (nextProps.selected !== prevProps.selected) newState.selected = nextProps.selected;
-        if (nextProps.highlighted !== prevProps.highlighted) newState.highlighted = nextProps.highlighted;
-        if (!newState.length) return newState;
-        return null;
-    }
-
-    render() {
-        return (<div
-            className="bar"
-            value={String(this.state.data)}
-            style={{
-                height: String(this.state.data * 5) + 'px',
-                backgroundColor: (
-                    this.state.highlighted ? HIGHLIGHT_COLOR : (this.state.selected ? SORTED_COLOR : PRIMARY_COLOR)
-                )
-            }}
-        >
-        </div>)
-    }
-}
 
 class BarGraph extends React.Component {
     constructor(props) {
@@ -119,6 +82,9 @@ class BarGraph extends React.Component {
                     </div>
                 </div>
                 <div className="barFrame">
+                    <div className="algoButtons">
+                        <button onClick={this.insertionSort}> Sort </button>
+                    </div>
                     {
                         this.state.arr.map((item, index) => {
                             return <Bar highlighted={this.state.highlighted[index]} selected={this.state.selected[index]} data={item} />
