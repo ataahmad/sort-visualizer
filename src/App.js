@@ -9,7 +9,7 @@ function App() {
       <header className="App-header">
         Sorting Visualizer <small>v{pjson.version}</small>
       </header>
-      <BarGraph/>
+      <BarGraph />
     </div>
   );
 }
