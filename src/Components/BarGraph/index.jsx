@@ -75,15 +75,15 @@ class BarGraph extends React.Component {
             <div>
                 <div className="buttonBar">
                     <div className="configButtons">
-                        <button onClick={this.refreshArray}> Refresh </button>
+                        <button className="button-27" role="button" onClick={this.refreshArray}> Refresh </button>
                     </div>
                     <div className="algoButtons">
-                        <button onClick={this.insertionSort}> Insertion Sort </button>
+                        <button className="button-27" role="button" onClick={this.insertionSort}> Insertion Sort </button>
                     </div>
                 </div>
                 <div className="barFrame">
                     <div className="algoButtons">
-                        <button onClick={this.insertionSort}> Sort </button>
+                        <button className="button-27 sort" role="button" onClick={this.insertionSort}> Sort </button>
                     </div>
                     {
                         this.state.arr.map((item, index) => {
