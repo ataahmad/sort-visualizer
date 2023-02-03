@@ -1,5 +1,5 @@
 import './App.css';
-import BarGraph from './Components/BarGraph';
+import InsertionSort from './Components/InsertionSort';
 
 const pjson = require('../package.json');
 
@@ -9,7 +9,9 @@ function App() {
       <header className="App-header">
         Sorting Visualizer <small>v{pjson.version}</small>
       </header>
-      <BarGraph />
+      <div>
+        <InsertionSort />
+      </div>
     </div>
   );
 }

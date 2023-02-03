@@ -3,10 +3,10 @@ import '../Components.css';
 import Bar from "../Bar";
 
 const ARRAY_LENGTH = 50;
-const TIMEOUT_INT = 100;
+const TIMEOUT_INT = 10;
 const generateNewArray = () => { return Array.from({ length: ARRAY_LENGTH }, () => Math.floor(Math.random() * 100)) };
 
-class BarGraph extends React.Component {
+class InsertionSort extends React.Component {
     constructor(props) {
         super(props)
         this.state = {
@@ -82,9 +82,6 @@ class BarGraph extends React.Component {
                     </div>
                 </div>
                 <div className="barFrame">
-                    <div className="algoButtons">
-                        <button className="button-27 sort" onClick={this.insertionSort}> Sort </button>
-                    </div>
                     {
                         this.state.arr.map((item, index) => {
                             return <Bar highlighted={this.state.highlighted[index]} selected={this.state.selected[index]} data={item} />
@@ -96,4 +93,4 @@ class BarGraph extends React.Component {
     }
 }
 
-export default BarGraph;
+export default InsertionSort;
