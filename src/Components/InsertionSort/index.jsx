@@ -1,49 +1,12 @@
 import React from "react";
-import './BarGraph.css'
+import '../Components.css';
+import Bar from "../Bar";
 
 const ARRAY_LENGTH = 50;
-const TIMEOUT_INT = 5;
+const TIMEOUT_INT = 10;
 const generateNewArray = () => { return Array.from({ length: ARRAY_LENGTH }, () => Math.floor(Math.random() * 100)) };
-const PRIMARY_COLOR = 'black';
-const SORTED_COLOR = 'red';
-const HIGHLIGHT_COLOR = 'blue';
 
-
-class Bar extends React.Component {
-    constructor(props) {
-        super(props);
-        this.state = {
-            data: this.props.data,
-            selected: this.props.selected,
-            highlighted: this.props.highlighted
-        };
-    }
-
-    static getDerivedStateFromProps(nextProps, prevProps) {
-        const newState = {};
-        if (nextProps.data !== prevProps.data) newState.data = nextProps.data;
-        if (nextProps.selected !== prevProps.selected) newState.selected = nextProps.selected;
-        if (nextProps.highlighted !== prevProps.highlighted) newState.highlighted = nextProps.highlighted;
-        if (!newState.length) return newState;
-        return null;
-    }
-
-    render() {
-        return (<div
-            className="bar"
-            value={String(this.state.data)}
-            style={{
-                height: String(this.state.data * 5) + 'px',
-                backgroundColor: (
-                    this.state.highlighted ? HIGHLIGHT_COLOR : (this.state.selected ? SORTED_COLOR : PRIMARY_COLOR)
-                )
-            }}
-        >
-        </div>)
-    }
-}
-
-class BarGraph extends React.Component {
+class InsertionSort extends React.Component {
     constructor(props) {
         super(props)
         this.state = {
@@ -112,10 +75,10 @@ class BarGraph extends React.Component {
             <div>
                 <div className="buttonBar">
                     <div className="configButtons">
-                        <button onClick={this.refreshArray}> Refresh </button>
+                        <button className="button-27" onClick={this.refreshArray}> Refresh </button>
                     </div>
                     <div className="algoButtons">
-                        <button onClick={this.insertionSort}> Insertion Sort </button>
+                        <button className="button-27" onClick={this.insertionSort}> Insertion Sort </button>
                     </div>
                 </div>
                 <div className="barFrame">
@@ -130,4 +93,4 @@ class BarGraph extends React.Component {
     }
 }
 
-export default BarGraph;
+export default InsertionSort;
