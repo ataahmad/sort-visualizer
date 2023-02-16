@@ -6,7 +6,7 @@ const SORTED_COLOR = 'red';
 const HIGHLIGHT_COLOR = 'blue';
 
 
-export default class Bar extends React.Component {
+export default class Bar extends React.PureComponent {
     constructor(props) {
         super(props);
         this.state = {
