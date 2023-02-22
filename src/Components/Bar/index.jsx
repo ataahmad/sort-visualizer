@@ -11,7 +11,7 @@ export default class Bar extends React.PureComponent {
         super(props);
         this.state = {
             data: this.props.data,
-            selected: this.props.selected,
+            sorted: this.props.sorted,
             highlighted: this.props.highlighted
         };
     }
@@ -19,7 +19,7 @@ export default class Bar extends React.PureComponent {
     static getDerivedStateFromProps(nextProps, prevProps) {
         const newState = {};
         if (nextProps.data !== prevProps.data) newState.data = nextProps.data;
-        if (nextProps.selected !== prevProps.selected) newState.selected = nextProps.selected;
+        if (nextProps.sorted !== prevProps.sorted) newState.sorted = nextProps.sorted;
         if (nextProps.highlighted !== prevProps.highlighted) newState.highlighted = nextProps.highlighted;
         if (!newState.length) return newState;
         return null;
@@ -32,7 +32,7 @@ export default class Bar extends React.PureComponent {
             style={{
                 height: String(this.state.data * 5) + 'px',
                 backgroundColor: (
-                    this.state.highlighted ? HIGHLIGHT_COLOR : (this.state.selected ? SORTED_COLOR : PRIMARY_COLOR)
+                    this.state.highlighted ? HIGHLIGHT_COLOR : (this.state.sorted ? SORTED_COLOR : PRIMARY_COLOR)
                 )
             }}
         >

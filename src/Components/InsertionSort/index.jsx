@@ -12,7 +12,7 @@ class InsertionSort extends React.Component {
         super(props)
         this.state = {
             arr: [],
-            selected: [],
+            sorted: [],
             highlighted: [],
         }
         this.insertionSort = insertionSort.bind(this);
@@ -25,9 +25,9 @@ class InsertionSort extends React.Component {
 
     refreshArray = () => {
         const newData = generateNewArray();
-        const newSelected = new Array(ARRAY_LENGTH).fill(0);
+        const newSorted = new Array(ARRAY_LENGTH).fill(0);
         const newHigh = new Array(ARRAY_LENGTH).fill(0);
-        this.setState({ arr: newData, selected: newSelected, highlighted: newHigh });
+        this.setState({ arr: newData, sorted: newSorted, highlighted: newHigh });
     }
 
     render() {
@@ -44,7 +44,7 @@ class InsertionSort extends React.Component {
                 <div className="barFrame">
                     {
                         this.state.arr.map((item, index) => {
-                            return <Bar highlighted={this.state.highlighted[index]} selected={this.state.selected[index]} data={item} />
+                            return <Bar highlighted={this.state.highlighted[index]} sorted={this.state.sorted[index]} data={item} />
                         })
                     }
                 </div>

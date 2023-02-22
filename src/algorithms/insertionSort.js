@@ -19,20 +19,20 @@ export default function insertionSort() {
                 incrementing = true;
 
                 // Update the state and schedule the next step
-                let newSel = new Array(i).fill(1).concat(new Array(n - i - 1).fill(0));
+                let newSort = new Array(i).fill(1).concat(new Array(n - i - 1).fill(0));
                 let newHigh = new Array(n).fill(0);
                 newHigh[i] = newHigh[j] = 1;
-                this.setState({ arr: [...arr], selected: newSel, highlighted: newHigh }, () => setTimeout(incrementStep, TIMEOUT_INT));
+                this.setState({ arr: [...arr], sorted: newSort, highlighted: newHigh }, () => setTimeout(incrementStep, TIMEOUT_INT));
             } else {
                 arr[j + 1] = key;
                 i++;
                 incrementing = false;
 
                 // Update the state and schedule the next step
-                let newSel = new Array(i).fill(1).concat(new Array(n - i - 1).fill(0));
+                let newSort = new Array(i).fill(1).concat(new Array(n - i - 1).fill(0));
                 let newHigh = new Array(n).fill(0);
                 newHigh[i] = newHigh[j] = 1;
-                this.setState({ arr: [...arr], selected: newSel, highlighted: newHigh }, () => setTimeout(incrementStep, TIMEOUT_INT));
+                this.setState({ arr: [...arr], sorted: newSort, highlighted: newHigh }, () => setTimeout(incrementStep, TIMEOUT_INT));
             }
         }
     }
